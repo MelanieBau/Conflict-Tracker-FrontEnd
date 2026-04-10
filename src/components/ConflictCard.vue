@@ -3,9 +3,9 @@
     <h2>{{ conflict.name }}</h2>
     <p>{{ conflict.startDate }}</p>
     <p>{{ conflict.countries.join(', ') }}</p>
-    <span class="badge" :class="conflict.status === 'ACTIVE' ? 'activo' : 'finalizado'">
-      {{ conflict.status }}
-    </span>
+    <span class="badge" :class="conflict.status === 'ACTIVE' ? 'activo' : conflict.status === 'FROZEN' ? 'frozen' : 'finalizado'">
+  {{ conflict.status === 'ACTIVE' ? 'Activo' : conflict.status === 'FROZEN' ? 'Congelado' : 'Finalizado' }}
+</span>
     <div class="acciones">
       <RouterLink :to="`/conflicts/${conflict.id}`">Ver detalle →</RouterLink>
       <button @click="$emit('eliminar', conflict.id)">Eliminar</button>
@@ -97,5 +97,11 @@ button {
 button:hover {
   border-color: #a32e21;
   color: #e94560;
+}
+
+.badge.frozen {
+  background: #1a2a3a;
+  color: #56b4d9;
+  border: 1px solid #2a7a9b;
 }
 </style>

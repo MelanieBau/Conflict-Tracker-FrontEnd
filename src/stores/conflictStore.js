@@ -35,12 +35,12 @@ export const useConflictStore = defineStore('conflict', {
     },
 
     async addConflict(conflict) {
-      try {
-        await createConflict(conflict)
-        await this.fetchConflicts()
-      } catch (e) {
-        this.error = 'Error al crear el conflicto'
-      }
+    try {
+    await createConflict(conflict)
+    await this.fetchConflicts()
+    } catch (e) {
+    this.error = 'Error al crear el conflicto'
+    }
     },
 
     async removeConflict(id) {
@@ -50,6 +50,30 @@ export const useConflictStore = defineStore('conflict', {
       } catch (e) {
         this.error = 'Error al eliminar el conflicto'
       }
+    },
+
+   async addConflict(conflict) {
+  try {
+    console.log('Store recibe:', conflict)
+    const response = await createConflict(conflict)
+    console.log('Respuesta:', response)
+    await this.fetchConflicts()
+  } catch (e) {
+    console.log('Error:', e.response?.data)
+    this.error = 'Error al crear el conflicto'
+  }
+},
+
+
+async removeConflict(id) {
+  try {
+    console.log('Eliminando id:', id)
+    await deleteConflict(id)
+    await this.fetchConflicts()
+  } catch (e) {
+    console.log('Error eliminar:', e.response)
+    this.error = 'Error al eliminar el conflicto'
+    }
     }
   }
 })

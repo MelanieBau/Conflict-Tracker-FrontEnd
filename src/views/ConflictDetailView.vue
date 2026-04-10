@@ -9,11 +9,12 @@
       <div class="header" :class="store.currentConflict.status === 'ACTIVE' ? 'activo' : 'finalizado'">
         <div class="header-top">
           <h1>{{ store.currentConflict.name }}</h1>
-          <span class="badge" :class="store.currentConflict.status === 'ACTIVE' ? 'activo' : 'finalizado'">
-            {{ store.currentConflict.status === 'ACTIVE' ? 'Activo' : 'Finalizado' }}
-          </span>
-        </div>
-      </div>
+        <span class="badge" :class="store.currentConflict.status === 'ACTIVE' ? 'activo' : store.currentConflict.status === 'FROZEN' ? 'frozen' : 'finalizado'">
+            {{ store.currentConflict.status === 'ACTIVE' ? 'Activo' : store.currentConflict.status === 'FROZEN' ? 'Congelado' : 'Finalizado' }}
+        </span>   
+    </div>
+    </div>
+    
 
       <div class="info">
         <div class="info-item">
@@ -183,4 +184,11 @@ const eliminar = async () => {
   background: #e94560;
   color: white;
 }
+
+.badge.frozen {
+  background: #1a2a3a;
+  color: #56b4d9;
+  border: 1px solid #2a7a9b;
+}
+
 </style>
